@@ -153,6 +153,7 @@ function nextQuestion(){
 	//time = 10;
 	//Populate the question row in html
 	currentQuestionNum++;
+	console.log("current array number "+currentArrayNum)
 	displayQuestion(selectedTrivia[currentArrayNum]);
 		//Start 30 second timer
 		//startTimer();
@@ -162,7 +163,7 @@ function nextQuestion(){
 
 function displayQuestion(index){
 	currentAnswer = trivia[index].Answer;
-	$('#current-progress').html('Question '+ parseInt(currentQuestionNum) +'/10');
+	$('#current-progress').html('Question '+ currentQuestionNum +'/10');
 	$('.question h4').html(trivia[index].Question);
 	$('.choices .text-center').empty();
 	for (var i=1; i <=4; i++){
@@ -174,18 +175,18 @@ function displayQuestion(index){
 }
 
 function startTimer(){
-	intervalId = setInterval(decrement, 1000);
+	//intervalId = setInterval(decrement, 1000);
 }
 
 function decrement(){
 	//decrease time by 1
-	time--;
+	//time--;
 	//display the time
-	$('.time h4').html('Time Remaining '+time);
+	//$('.time h4').html('Time Remaining '+time);
 }
 
 function stopTimer(){
-	clearInterval(intervalId);
+	//clearInterval(intervalId);
 }
 
 function updateScores(){
@@ -210,7 +211,22 @@ function playGame(){
 	updateScores();
 	nextQuestion();
 			
-	//capture user guess
+	
+	
+		//if user guess is correct
+
+			//show answer
+			//alert to correct answer
+			//increase correct answer counter
+			//Wait 5 Seconds then next question
+		//if user guess is incorrect
+			//show answer
+			//alert to correct answer
+			//Wait 5 Seconds then next question
+		//update current question counter	
+}
+
+//capture user guess
 	$(document).on('click', '.choices h3', function(){
 		var userGuess = $(this).text()
 
@@ -228,19 +244,6 @@ function playGame(){
 			nextQuestion();
 		}
 	})
-	
-		//if user guess is correct
-
-			//show answer
-			//alert to correct answer
-			//increase correct answer counter
-			//Wait 5 Seconds then next question
-		//if user guess is incorrect
-			//show answer
-			//alert to correct answer
-			//Wait 5 Seconds then next question
-		//update current question counter	
-}
 
 function gameOver(){
 	$('.choices').hide();
