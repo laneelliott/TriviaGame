@@ -150,13 +150,15 @@ function chooseQuestions(){
 
 function nextQuestion(){
 	console.log('next question function');
-	//time = 10;
+	stopTimer();
+	time = 20;
+	$('.time h4').html('Time Remaining '+time);
 	//Populate the question row in html
 	currentQuestionNum++;
 	console.log("current array number "+currentArrayNum)
 	displayQuestion(selectedTrivia[currentArrayNum]);
 		//Start 30 second timer
-		//startTimer();
+		startTimer();
 	currentArrayNum++;
 	//console.log(currentArrayNum);
 }
@@ -175,18 +177,22 @@ function displayQuestion(index){
 }
 
 function startTimer(){
-	//intervalId = setInterval(decrement, 1000);
+	intervalId = setInterval(decrement, 1000);
 }
 
 function decrement(){
 	//decrease time by 1
-	//time--;
+	time--;
 	//display the time
-	//$('.time h4').html('Time Remaining '+time);
+	$('.time h4').html('Time Remaining '+time);
+	if(time === 0 ){
+		stopTimer()
+		nextQuestion();
+	}
 }
 
 function stopTimer(){
-	//clearInterval(intervalId);
+	clearInterval(intervalId);
 }
 
 function updateScores(){
@@ -227,23 +233,23 @@ function playGame(){
 }
 
 //capture user guess
-	$(document).on('click', '.choices h3', function(){
-		var userGuess = $(this).text()
+$(document).on('click', '.choices h3', function(){
+	var userGuess = $(this).text()
 
-		if(userGuess == currentAnswer){
-			//console.log('you win')
-			correctNum++;
-			updateScores()
-		} else {
-			//console.log('you lose')
-		}
+	if(userGuess == currentAnswer){
+		//console.log('you win')
+		correctNum++;
+		updateScores()
+	} else {
+		//console.log('you lose')
+	}
 
-		if(currentQuestionNum === 10){
-			gameOver();
-		}else{
-			nextQuestion();
-		}
-	})
+	if(currentQuestionNum === 10){
+		gameOver();
+	}else{
+		nextQuestion();
+	}
+})
 
 function gameOver(){
 	$('.choices').hide();
